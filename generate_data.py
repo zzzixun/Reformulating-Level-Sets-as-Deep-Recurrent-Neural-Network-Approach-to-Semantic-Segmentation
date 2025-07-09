@@ -4,6 +4,9 @@ from skimage.morphology import disk, dilation
 import os
 
 VOC_ROOT = '/home/cbel/Desktop/zixun/VOCdevkit/VOC2012'
+IMG_DIR = "/home/cbel/Desktop/zixun/VOCdevkit/VOC2012/JPEGImages"
+LABEL_DIR = "/home/cbel/Desktop/zixun/VOCdevkit/VOC2012/SegmentationClass"
+OUT_DIR = "/home/cbel/caffe-1.0/my-crls/data"
 
 def gen_phi(img_shape, type='whole'):
 
