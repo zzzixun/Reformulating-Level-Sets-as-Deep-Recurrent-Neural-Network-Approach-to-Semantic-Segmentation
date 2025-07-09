@@ -1,7 +1,9 @@
 import numpy as np
 import math
 from skimage.morphology import disk, dilation
+import os
 
+VOC_ROOT = '/home/cbel/Desktop/zixun/VOCdevkit/VOC2012'
 
 def gen_phi(img_shape, type='whole'):
 
