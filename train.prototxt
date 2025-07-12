@@ -1,0 +1,11 @@
+layer {
+  name: "data"
+  type: "Python"
+  top: "data"
+  top: "label"
+  python_param {
+    module: "image_seg_data_layer"
+    layer: "ImageSegDataLayer"
+    param_str: "{ 'batch_size': 1, 'data_list': 'data/train_list.txt', 'root': '/path/to/VOC2012' }"
+  }
+}
