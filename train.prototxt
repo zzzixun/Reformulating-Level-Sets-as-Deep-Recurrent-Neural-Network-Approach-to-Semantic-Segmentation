@@ -1,11 +1,44 @@
+name: "SimpleSegNet"
+
 layer {
   name: "data"
-  type: "Python"
+  type: "ImageSegData"
   top: "data"
   top: "label"
-  python_param {
-    module: "image_seg_data_layer"
-    layer: "ImageSegDataLayer"
-    param_str: "{ 'batch_size': 1, 'data_list': 'data/train_list.txt', 'root': '/path/to/VOC2012' }"
+  include { phase: TRAIN }
+  image_seg_data_param {
+    source: "train_list.txt"
+    batch_size: 4
+    new_height: 384
+    new_width: 512
+    shuffle: true
   }
+  transform_param {
+    mean_value: 104
+    mean_value: 117
+    mean_value: 123
+  }
+}
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  convolution_param {
+    num_output: 21
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler { type: "xavier" }
+  }
+}
+
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "conv1"
+  bottom: "label"
+  top: "loss"
+  loss_param { ignore_label: 255 normalization: VALID }
 }
